@@ -1,6 +1,6 @@
 import Label from "./Label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 const TodolistCard = () => {
   return (
     <section className="min-h-10 flex w-full max-w-[45rem] items-center justify-between gap-2 border-b-2 border-t-2 p-2 px-8">
@@ -23,6 +23,10 @@ const TodolistCard = () => {
           <Label />
           <Label />
           <Label />
+          <div className="flex items-center gap-1 text-sm">
+            <FontAwesomeIcon icon={faClock} />
+            13.00
+          </div>
           <div className="flex items-center gap-1 text-sm">
             <FontAwesomeIcon icon={faCalendar} />
             2023-06-033
