@@ -1,4 +1,5 @@
 import AddList from "./Component/AddList";
+import FormList from "./Component/FormList";
 import Sidebar from "./Component/Sidebar";
 import TodolistCard from "./Component/TodolistCard";
 
@@ -14,7 +15,7 @@ function App() {
         <TodolistCard />
         <TodolistCard />
       </div>
-      <Sidebar />
+      <FormList />
     </div>
   );
 }
