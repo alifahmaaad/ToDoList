@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 const TodolistCard = () => {
   return (
-    <section className="min-h-10 flex w-full max-w-[45rem] items-center justify-between gap-2 border-b-2 border-t-2 p-2 px-8">
-      <div className="flex flex-col gap-1">
+    <section className="min-h-10 flex w-full max-w-[20rem] items-center justify-between gap-2 border-b-2 border-t-2 p-2 px-8 md:max-w-[45rem]">
+      <div className="flex flex-col flex-wrap gap-1">
         <div className="flex gap-2">
           <input
             type="checkbox"
@@ -18,7 +18,7 @@ const TodolistCard = () => {
             officia unde magnam voluptas nostrum delectus optio pariatur!
           </div>
         </div>
-        <div className="flex items-center gap-3 pl-5 ">
+        <div className="flex flex-wrap items-center gap-3 pl-5">
           <Label />
           <Label />
           <Label />
