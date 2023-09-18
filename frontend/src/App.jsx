@@ -2,6 +2,7 @@ import AddList from "./Component/AddList";
 import FormList from "./Component/FormList";
 import Sidebar from "./Component/Sidebar";
 import TodolistCard from "./Component/TodolistCard";
+import UpdateList from "./Component/UpdateList";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <TodolistCard />
         <TodolistCard />
       </div>
-      <FormList />
+      <UpdateList />
+      {/* <FormList /> */}
     </div>
   );
 }
