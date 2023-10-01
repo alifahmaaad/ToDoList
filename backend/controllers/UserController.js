@@ -25,5 +25,7 @@ export const login = async (req, res) => {
       expiresIn: "30m",
     });
     res.status(200).json({ token: accessToken });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
