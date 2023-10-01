@@ -1,5 +1,14 @@
 import express from "express";
-import { createTask } from "../controllers/TodolistController.js";
+import {
+  createTask,
+  deleteTask,
+  getAllTaskByUserId,
+  updateTask,
+} from "../controllers/TodolistController.js";
+import { verifyToken } from "../middleware/VerifyToken.js";
 const router = express.Router();
-router.post("/create", createTask);
+router.post("/create", verifyToken, createTask);
+router.delete("/task/delete", verifyToken, deleteTask);
+router.put("/task/update", verifyToken, updateTask);
+router.get("/task", verifyToken, getAllTaskByUserId);
 export default router;
