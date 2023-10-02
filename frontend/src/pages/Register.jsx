@@ -35,7 +35,7 @@ const Register = () => {
           </button>
         </form>
         <p className="py-5">
-          already have account?
+          already have account?{" "}
           <button
             type="button"
             className="text-lime-400"
