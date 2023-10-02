@@ -1,8 +1,13 @@
-const FormList = () => {
+const FormList = ({ func }) => {
   return (
-    <section className="absolute h-full w-full rounded-md p-4 lg:relative lg:w-fit">
+    <section className="h-full w-full rounded-md p-4  lg:w-fit">
       <div className="flex h-full flex-col gap-4 rounded-lg bg-gray-50 p-5 font-mono shadow-md lg:w-[25vw]">
-        <p className="pb-5 text-xl font-bold">Add Tasks to List:</p>
+        <div className="flex w-full justify-between">
+          <p className="pb-5 text-xl font-bold">Add Tasks to List:</p>
+          <button className="pb-5 text-xl font-bold" onClick={() => func()}>
+            X
+          </button>
+        </div>
         <form className="flex h-max flex-col justify-center gap-4">
           <label htmlFor="task" className="text-sm">
             Task
