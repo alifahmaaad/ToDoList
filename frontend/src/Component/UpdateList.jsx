@@ -1,10 +1,10 @@
-const UpdateList = () => {
+const UpdateList = ({ func, dataTask }) => {
   return (
-    <section className="absolute h-full w-full rounded-md p-4 lg:relative lg:w-fit">
+    <section className="h-full w-full rounded-md p-4 lg:w-fit">
       <div className="flex h-full flex-col gap-4 rounded-lg bg-gray-50 p-5 font-mono shadow-md lg:w-[25vw]">
         <div className="flex justify-between">
           <p className="pb-5 text-xl font-bold">Update Task:</p>
-          <button className="pb-5 text-xl font-bold" onClick={""}>
+          <button className=" text-xl font-bold" onClick={() => func()}>
             X
           </button>
         </div>
