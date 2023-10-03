@@ -7,7 +7,7 @@ export const createUser = async (req, res) => {
   const hashpassword = await bcrypt.hash(password, salt);
   try {
     await User.create({ username, password: hashpassword }).then((data) => {
-      res.status(200).json(data);
+      res.status(200).json(data.username);
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -19,12 +19,19 @@ export const login = async (req, res) => {
     const userData = await User.findOne({
       username: username,
     });
-    const isMatch = bcrypt.compare(password, userData.password);
-    if (!isMatch) res.status(400).json({ message: "Wrong Password" });
-    const accessToken = jwt.sign({ username }, "Secret_key", {
-      expiresIn: "30m",
-    });
-    res.status(200).json({ token: accessToken });
+    if (userData == null) {
+      res.status(400).json({ message: "User with that username not found!" });
+    } else {
+      const isMatch = await bcrypt.compare(password, userData.password);
+      if (!isMatch) {
+        res.status(400).json({ message: "Wrong Password" });
+      } else {
+        const accessToken = jwt.sign({ username }, "Secret_key", {
+          expiresIn: "30m",
+        });
+        res.status(200).json({ token: accessToken });
+      }
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
