@@ -61,7 +61,7 @@ const Register = () => {
             type="submit"
             disabled={isLoading}
           >
-            {isLoading ? "Register" : "Loading..."}
+            {isLoading ? "Loading..." : "Register"}
           </button>
         </form>
         <p className="py-5">
@@ -76,11 +76,11 @@ const Register = () => {
         </p>
 
         {successMSG != "" && (
-          <div className="absolute flex h-full w-full items-center justify-center bg-black bg-opacity-30">
+          <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-30">
             <p className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
               {successMSG}
-              <p className="text-black">Redirect to Login ...</p>
             </p>
+            <p className="text-black">Redirect to Login ...</p>
           </div>
         )}
       </div>

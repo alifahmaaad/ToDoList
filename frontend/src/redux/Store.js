@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import persistedTokenReducer from "../redux/TokenSlice";
+import tokenReducer from "../redux/TokenSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import sessionStorage from "redux-persist/es/storage/session";
 const persistConfig = {
@@ -11,5 +11,9 @@ export const store = configureStore({
   reducer: {
     tokenReducer: persistedTokenReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 export const persistor = persistStore(store);

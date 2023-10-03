@@ -1,9 +1,40 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setToken } from "../redux/TokenSlice";
+import { useState } from "react";
 const Login = () => {
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const [successMSG, setSuccessMSG] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData(e.target);
+    setIsLoading(true);
+    await axios
+      .post(`http://localhost:5000/login`, {
+        username: data.get("username"),
+        password: data.get("password"),
+      })
+      .then((res) => {
+        if (res.status == 200) {
+          setSuccessMSG(`Login Success`);
+          dispatch(setToken(res.data.token));
+          setIsLoading(false);
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+        }
+      })
+      .catch((e) => {
+        if (e.code == "ERR_NETWORK") {
+          alert(e.message);
+        } else {
+          alert(e.response.data.message);
+        }
+        setIsLoading(false);
+      });
   };
   return (
     <div className="flex h-full w-full items-center justify-center">
@@ -30,8 +61,9 @@ const Login = () => {
           <button
             className="bg-gray-200 p-2 font-mono font-semibold"
             type="submit"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
         <p className="py-5">
@@ -44,6 +76,14 @@ const Login = () => {
             Register
           </button>
         </p>
+        {successMSG != "" && (
+          <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-30">
+            <p className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
+              {successMSG}
+            </p>
+            <p className="text-black">Redirect to Home ...</p>
+          </div>
+        )}
       </div>
     </div>
   );
