@@ -59,8 +59,9 @@ const Register = () => {
           <button
             className="bg-gray-200 p-2 font-mono font-semibold"
             type="submit"
+            disabled={isLoading}
           >
-            Register
+            {isLoading ? "Register" : "Loading..."}
           </button>
         </form>
         <p className="py-5">
@@ -69,9 +70,8 @@ const Register = () => {
             type="button"
             className="text-lime-400"
             onClick={() => navigate("/login")}
-            disabled={isLoading}
           >
-            {isLoading ? "Register" : "Loading..."}
+            Login
           </button>
         </p>
 
