@@ -4,6 +4,7 @@ import mongoDB from "./database/db.js";
 import mongoose from "mongoose";
 import TodolistRouter from "./routers/TodolistRouter.js";
 import UserRouter from "./routers/UserRouter.js";
+import cookieParser from "cookie-parser";
 try {
   await mongoose.connect(mongoDB);
   console.log("database connected...");
