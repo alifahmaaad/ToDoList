@@ -49,3 +49,10 @@ export const login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+export const logout = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) return res.sendStatus(204);
+  await Token.findOneAndDelete({ refreshToken: refreshToken });
+  res.clearCookie("refreshToken");
+  res.status(200);
+};
