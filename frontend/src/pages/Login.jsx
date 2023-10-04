@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setToken } from "../redux/TokenSlice";
+import { setIsLogin } from "../redux/TokenSlice";
 import { useState } from "react";
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
       .then((res) => {
         if (res.status == 200) {
           setSuccessMSG(`Login Success`);
-          dispatch(setToken(res.data.token));
+          dispatch(setIsLogin());
           setIsLoading(false);
           setTimeout(() => {
             navigate("/");
@@ -78,10 +78,10 @@ const Login = () => {
         </p>
         {successMSG != "" && (
           <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-30">
-            <p className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
-              {successMSG}
-            </p>
-            <p className="text-black">Redirect to Home ...</p>
+            <div className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
+              <p>{successMSG}</p>
+              <b className="text-black">Redirect to Home ...</b>
+            </div>
           </div>
         )}
       </div>

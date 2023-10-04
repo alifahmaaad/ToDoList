@@ -1,6 +1,10 @@
 import express from "express";
-import { createUser, login } from "../controllers/UserController.js";
+import { createUser, login, logout } from "../controllers/UserController.js";
+import { verifyToken } from "../middleware/VerifyToken.js";
+import { refreshToken } from "../controllers/TokenController.js";
 const router = express.Router();
 router.post("/login", login);
 router.post("/register", createUser);
+router.post("/logout", verifyToken, logout);
+router.post("/refresh", refreshToken);
 export default router;

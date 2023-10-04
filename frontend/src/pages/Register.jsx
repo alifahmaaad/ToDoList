@@ -24,7 +24,11 @@ const Register = () => {
         }
       })
       .catch((e) => {
-        alert(e.message);
+        if (e.response?.data?.error) {
+          alert(e.response.data.error);
+        } else {
+          alert(e.message);
+        }
         setIsLoading(false);
       });
   };
@@ -77,10 +81,10 @@ const Register = () => {
 
         {successMSG != "" && (
           <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-30">
-            <p className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
-              {successMSG}
-            </p>
-            <p className="text-black">Redirect to Login ...</p>
+            <div className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
+              <p>{successMSG}</p>
+              <b className="text-black">Redirect to Login ...</b>
+            </div>
           </div>
         )}
       </div>
