@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const TokenSlice = createSlice({
-  name: "tokenReducer",
+export const isLoginSlice = createSlice({
+  name: "IsLoginReducer",
   initialState: {
-    token: "",
+    isLogin: false,
   },
   reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload;
+    setIsLogin: (state) => {
+      state.token = true;
     },
-    deleteToken: (state) => {
-      state.token = "";
+    deleteIsLogin: (state) => {
+      state.token = false;
     },
   },
 });
 
-export const { setToken, deleteToken } = TokenSlice.actions;
+export const { setIsLogin, deleteIsLogin } = isLoginSlice.actions;
 
-export default TokenSlice.reducer;
+export default isLoginSlice.reducer;
