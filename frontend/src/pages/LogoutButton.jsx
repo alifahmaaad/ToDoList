@@ -21,7 +21,16 @@ const LogoutButton = () => {
           }, 1500);
         }
       })
-      .catch((e) => alert(e.message));
+      .catch((e) => {
+        if (e.response?.status == 403) {
+          dispatch(deleteIsLogin());
+          setTimeout(() => {
+            navigate("/login");
+            setIsLoading(false);
+          }, 1500);
+        }
+        alert(e.message);
+      });
   };
   return (
     <button

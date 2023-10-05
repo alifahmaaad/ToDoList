@@ -6,7 +6,6 @@ axios.interceptors.response.use(
     const originalRequest = error.config;
     if (error.response?.status === 401) {
       originalRequest._retry = true;
-      console.log(error.config);
       const response = await axios.get("refresh", { withCredentials: true });
       if (response.status === 200) {
         axios.defaults.headers.common[
