@@ -6,6 +6,7 @@ const todolistSchema = new Schema({
   description: String,
   datetime: { type: Date, default: Date.now },
   label: Array,
+  isChecked: { type: Boolean, default: false },
   user_id: { type: String, require: true },
 });
 
