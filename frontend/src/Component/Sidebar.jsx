@@ -4,8 +4,11 @@ import {
   faList12,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LogoutButton from "../pages/LogoutButton";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const { isLogin } = useSelector((state) => state.isLoginReducer);
   return (
     <aside className=" h-fit w-full rounded-md p-4 lg:h-full lg:w-fit">
       <div className="flex h-full flex-col gap-4 rounded-lg bg-gray-50 p-5 font-mono shadow-md lg:w-[18vw]">
@@ -26,6 +29,7 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faCalendarDays} />
             Calendar
           </button>
+          <LogoutButton />
         </div>
       </div>
     </aside>
