@@ -24,11 +24,12 @@ export const login = async (req, res) => {
     if (userData == null) {
       res.status(400).json({ message: "User with that username not found!" });
     } else {
-      if (!bcrypt.compare(password, userData.password)) {
+      const isVerify = await bcrypt.compare(password, userData.password);
+      if (!isVerify) {
         res.status(400).json({ message: "Wrong Password" });
       } else {
         const accessToken = jwt.sign({ username }, "Secret_key", {
-          expiresIn: "30m",
+          expiresIn: "10s",
         });
         const refreshToken = jwt.sign({ username }, "Secret_Refresh_key", {
           expiresIn: "7d",
@@ -53,6 +54,6 @@ export const logout = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) return res.sendStatus(204);
   await Token.findOneAndDelete({ refreshToken: refreshToken });
-  res.clearCookie("refreshToken");
-  res.status(200);
+  res.cookie("refreshToken", "", { maxAge: 0 });
+  res.sendStatus(200);
 };
