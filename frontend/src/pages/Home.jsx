@@ -28,7 +28,7 @@ const Home = () => {
       window.scrollTo(0, document.body.scrollHeight);
   }, [isAddOpen, isUpdateOpen]);
   useEffect(() => {
-    isLogin && navigate("/login");
+    !isLogin && navigate("/login");
   }, []);
   return (
     <div className="flex h-full flex-col lg:flex-row">
