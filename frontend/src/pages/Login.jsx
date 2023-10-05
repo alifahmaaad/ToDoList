@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setIsLogin } from "../redux/TokenSlice";
 import { useState } from "react";
+import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,14 +13,21 @@ const Login = () => {
     const data = new FormData(e.target);
     setIsLoading(true);
     await axios
-      .post(`http://localhost:5000/login`, {
-        username: data.get("username"),
-        password: data.get("password"),
-      })
+      .post(
+        `login`,
+        {
+          username: data.get("username"),
+          password: data.get("password"),
+        },
+        { withCredentials: true },
+      )
       .then((res) => {
         if (res.status == 200) {
           setSuccessMSG(`Login Success`);
           dispatch(setIsLogin());
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${res.data.token}`;
           setIsLoading(false);
           setTimeout(() => {
             navigate("/");
@@ -31,7 +38,8 @@ const Login = () => {
         if (e.code == "ERR_NETWORK") {
           alert(e.message);
         } else {
-          alert(e.response.data.message);
+          console.log("test");
+          alert(e.response?.data?.message);
         }
         setIsLoading(false);
       });
