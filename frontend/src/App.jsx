@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFoundPage from "./pages/NotFoundPage";
-
+import "./interceptors/axios.js";
 function App() {
   return (
     <div className="flex h-full w-full items-center md:justify-between">

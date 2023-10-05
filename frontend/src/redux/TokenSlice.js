@@ -7,10 +7,10 @@ export const isLoginSlice = createSlice({
   },
   reducers: {
     setIsLogin: (state) => {
-      state.token = true;
+      state.isLogin = true;
     },
     deleteIsLogin: (state) => {
-      state.token = false;
+      state.isLogin = false;
     },
   },
 });

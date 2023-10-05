@@ -10,7 +10,7 @@ const Register = () => {
     const data = new FormData(e.target);
     setIsLoading(true);
     await axios
-      .post(`http://localhost:5000/register`, {
+      .post(`register`, {
         username: data.get("username"),
         password: data.get("password"),
       })

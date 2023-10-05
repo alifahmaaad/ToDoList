@@ -4,10 +4,14 @@ import FormList from "../Component/FormList";
 import Sidebar from "../Component/Sidebar";
 import TodolistCard from "../Component/TodolistCard";
 import UpdateList from "../Component/UpdateList";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [dataTask, setDataTask] = useState();
+  const navigate = useNavigate();
+  const { isLogin } = useSelector((state) => state.isLoginReducer);
   const handleIsOpenUpdate = () => {
     setIsAddOpen(false);
     setIsUpdateOpen(!isUpdateOpen);
@@ -23,6 +27,9 @@ const Home = () => {
     (isUpdateOpen || isAddOpen) &&
       window.scrollTo(0, document.body.scrollHeight);
   }, [isAddOpen, isUpdateOpen]);
+  useEffect(() => {
+    !isLogin && navigate("/login");
+  }, []);
   return (
     <div className="flex h-full flex-col lg:flex-row">
       <Sidebar />
