@@ -8,7 +8,7 @@ export const refreshToken = async (req, res) => {
       return res.sendStatus(403);
     }
     const date = new Date();
-    const token_db = await Token.findOne({
+    const token_db = await Token.find({
       refreshToken: refreshToken,
       expired_at: { $lte: date },
     });
