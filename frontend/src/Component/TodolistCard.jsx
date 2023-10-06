@@ -1,9 +1,8 @@
 import Label from "./Label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import UpdateList from "./UpdateList";
-const TodolistCard = ({ handleDataTask, func }) => {
+const TodolistCard = ({ handleDataTask, func, data }) => {
+  const dateValue = new Date(data.datetime);
   return (
     <section className="min-h-10 flex w-full  items-center justify-between gap-2 border-b-2 border-t-2 p-2 px-8 ">
       <div className="flex flex-col flex-wrap gap-1">
@@ -12,29 +11,26 @@ const TodolistCard = ({ handleDataTask, func }) => {
             type="checkbox"
             name="Todolist"
             className="checked:accent-lime-200"
+            defaultChecked={data.isChecked}
           />
           <div>
-            <h2 className="font-mono text-sm font-bold">Title</h2>
+            <h2 className="font-mono text-sm font-bold">{data.task}</h2>
             <div className="line-clamp-2 font-mono text-sm">
-              Ngapain ya hari ini Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Incidunt nemo magnam, ipsam tenetur id possimus
-              delectus similique. Corrupti nulla consequuntur itaque, ullam
-              officia unde magnam voluptas nostrum delectus optio pariatur!
+              {data.description}
             </div>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-3 pl-5">
-          <Label />
-          <Label />
-          <Label />
-          <Label />
+          {data.label?.map((val, i) => (
+            <Label key={i} val={val} />
+          ))}
           <div className="flex items-center gap-1 text-sm">
             <FontAwesomeIcon icon={faClock} />
-            13.00
+            {dateValue.toLocaleTimeString()}
           </div>
           <div className="flex items-center gap-1 text-sm">
             <FontAwesomeIcon icon={faCalendar} />
-            2023-06-033
+            {dateValue.toDateString()}
           </div>
         </div>
       </div>
@@ -45,7 +41,7 @@ const TodolistCard = ({ handleDataTask, func }) => {
           }
           onClick={() => {
             func();
-            handleDataTask("data task");
+            handleDataTask(data);
           }}
         />
       </div>
