@@ -8,7 +8,7 @@ import {
 import { verifyToken } from "../middleware/VerifyToken.js";
 const router = express.Router();
 router.post("/create", verifyToken, createTask);
-router.delete("/task/delete", verifyToken, deleteTask);
+router.delete("/task/delete/:id", verifyToken, deleteTask);
 router.put("/task/update", verifyToken, updateTask);
 router.get("/task", verifyToken, getAllTaskByUserId);
 export default router;

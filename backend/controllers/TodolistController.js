@@ -37,10 +37,10 @@ export const updateTask = async (req, res) => {
   }
 };
 export const deleteTask = async (req, res) => {
-  const { id } = req.body;
+  const id = req.params.id;
   try {
-    await Todolist.findByIdAndDelete({ id: id });
-    res.status(200);
+    await Todolist.findByIdAndDelete({ _id: id });
+    res.sendStatus(200);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

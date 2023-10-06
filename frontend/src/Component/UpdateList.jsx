@@ -20,7 +20,19 @@ const UpdateList = ({ func, dataTask, refresh }) => {
       .then((res) => {
         alert(`Berhasil Update task : ${res.data.task}`);
       })
-      .catch((e) => console.log(e))
+      .catch((e) => alert(e.message))
+      .finally(() => {
+        func();
+        refresh();
+      });
+  };
+  const handleDelete = async () => {
+    await axios
+      .delete(`task/delete/${dataTask._id}`)
+      .then(() => {
+        alert(`Berhasil delete task`);
+      })
+      .catch((e) => alert(e.message))
       .finally(() => {
         func();
         refresh();
@@ -110,7 +122,11 @@ const UpdateList = ({ func, dataTask, refresh }) => {
               ))}
           </div>
           <div className="flex justify-around p-2">
-            <button type="button" className="border px-5 py-1 font-semibold">
+            <button
+              type="button"
+              className="border px-5 py-1 font-semibold"
+              onClick={() => handleDelete()}
+            >
               Delete Task
             </button>
             <button

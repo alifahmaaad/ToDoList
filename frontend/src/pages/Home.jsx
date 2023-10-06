@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Home = () => {
   const position = ["today", "upcoming", "calendar"];
-  const [sidebarVal, setSidebarVal] = useState(1);
+  const [sidebarVal, setSidebarVal] = useState(0);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [dataTask, setDataTask] = useState();
