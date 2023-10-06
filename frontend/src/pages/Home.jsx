@@ -13,6 +13,7 @@ const Home = () => {
   const [dataTask, setDataTask] = useState();
   const [dateTask, setDateTask] = useState(new Date());
   const [dataTasks, setDataTasks] = useState();
+  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const { isLogin } = useSelector((state) => state.isLoginReducer);
   const handleIsOpenUpdate = (data) => {
@@ -34,7 +35,7 @@ const Home = () => {
   useEffect(() => {
     !isLogin && navigate("/login");
     isLogin && getAllTodoList();
-  }, []);
+  }, [refresh]);
   const getAllTodoList = async () => {
     await axios.get("task").then((res) => setDataTasks(res.data));
   };
@@ -54,9 +55,15 @@ const Home = () => {
         ))}
       </div>
       {isUpdateOpen && (
-        <UpdateList func={handleIsOpenUpdate} dataTask={dataTask} />
+        <UpdateList
+          func={handleIsOpenUpdate}
+          dataTask={dataTask}
+          refresh={() => setRefresh(!refresh)}
+        />
       )}
-      {isAddOpen && <FormList func={handleIsOpenAdd} />}
+      {isAddOpen && (
+        <FormList func={handleIsOpenAdd} refresh={() => setRefresh(!refresh)} />
+      )}
     </div>
   );
 };

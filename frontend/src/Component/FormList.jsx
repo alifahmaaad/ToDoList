@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const FormList = ({ func }) => {
+const FormList = ({ func, refresh }) => {
   const [label, setLabel] = useState([]);
   const [labelValue, setLabelValue] = useState("");
   const handleSubmit = async (e) => {
@@ -18,7 +18,10 @@ const FormList = ({ func }) => {
         alert(`Berhasil menambahkan task : ${res.data.task}`);
       })
       .catch((e) => alert(e.message))
-      .finally(() => func());
+      .finally(() => {
+        func();
+        refresh();
+      });
   };
   return (
     <section className="h-full w-full rounded-md p-4  lg:w-fit">

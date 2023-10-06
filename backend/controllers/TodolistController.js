@@ -28,7 +28,7 @@ export const getAllTaskByUserId = async (req, res) => {
 export const updateTask = async (req, res) => {
   try {
     const task = await Todolist.findByIdAndUpdate(
-      { id: req.body.id },
+      { _id: req.body.id },
       req.body
     );
     res.status(200).json(task);
