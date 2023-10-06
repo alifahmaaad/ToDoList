@@ -15,6 +15,7 @@ const LogoutButton = () => {
       .then((res) => {
         if (res.status == 200) {
           dispatch(deleteIsLogin());
+          delete axios.defaults.headers.common["Authorization"];
           setTimeout(() => {
             navigate("/login");
             setIsLoading(false);
@@ -24,6 +25,7 @@ const LogoutButton = () => {
       .catch((e) => {
         if (e.response?.status == 403) {
           dispatch(deleteIsLogin());
+          delete axios.defaults.headers.common["Authorization"];
           setTimeout(() => {
             navigate("/login");
             setIsLoading(false);
