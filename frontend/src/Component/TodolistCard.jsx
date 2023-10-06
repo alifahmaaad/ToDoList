@@ -1,9 +1,25 @@
 import Label from "./Label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import UpdateList from "./UpdateList";
-const TodolistCard = ({ handleDataTask, func }) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
+  const dateValue = new Date(data.datetime);
+  const [isLoading, setIsLoading] = useState();
+  const handleChecked = async (e) => {
+    setIsLoading(true);
+    await axios
+      .put("task/update", {
+        id: data._id,
+        isChecked: e.target.checked,
+      })
+      .catch((e) => alert(e.message))
+      .finally(() => {
+        setIsLoading(false);
+        refresh();
+      });
+  };
+  useEffect(() => {}, [isLoading]);
   return (
     <section className="min-h-10 flex w-full  items-center justify-between gap-2 border-b-2 border-t-2 p-2 px-8 ">
       <div className="flex flex-col flex-wrap gap-1">
@@ -12,29 +28,28 @@ const TodolistCard = ({ handleDataTask, func }) => {
             type="checkbox"
             name="Todolist"
             className="checked:accent-lime-200"
+            checked={data.isChecked}
+            onChange={(e) => handleChecked(e)}
+            disabled={isLoading}
           />
           <div>
-            <h2 className="font-mono text-sm font-bold">Title</h2>
+            <h2 className="font-mono text-sm font-bold">{data.task}</h2>
             <div className="line-clamp-2 font-mono text-sm">
-              Ngapain ya hari ini Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Incidunt nemo magnam, ipsam tenetur id possimus
-              delectus similique. Corrupti nulla consequuntur itaque, ullam
-              officia unde magnam voluptas nostrum delectus optio pariatur!
+              {data.description}
             </div>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-3 pl-5">
-          <Label />
-          <Label />
-          <Label />
-          <Label />
+          {data.label?.map((val, i) => (
+            <Label key={i} val={val} />
+          ))}
           <div className="flex items-center gap-1 text-sm">
             <FontAwesomeIcon icon={faClock} />
-            13.00
+            {dateValue.toLocaleTimeString()}
           </div>
           <div className="flex items-center gap-1 text-sm">
             <FontAwesomeIcon icon={faCalendar} />
-            2023-06-033
+            {dateValue.toDateString()}
           </div>
         </div>
       </div>
@@ -45,7 +60,7 @@ const TodolistCard = ({ handleDataTask, func }) => {
           }
           onClick={() => {
             func();
-            handleDataTask("data task");
+            handleDataTask(data);
           }}
         />
       </div>

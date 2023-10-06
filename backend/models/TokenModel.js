@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+const expire_time = 7 * 24 * 60 * 60 * 1000;
 
 const tokenSchema = new mongoose.Schema({
   user_username: { type: String, require: true },
-  expired_at: { type: Date, expires: 7 * 24 * 60 * 60 * 1000 },
+  expired_at: { type: Date, expires: expire_time },
   created_at: { type: Date, default: Date.now },
   refreshToken: { type: String },
 });
