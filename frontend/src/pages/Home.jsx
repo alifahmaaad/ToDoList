@@ -73,6 +73,7 @@ const Home = () => {
               func={handleIsOpenUpdate}
               key={i}
               data={val}
+              refresh={() => setRefresh(!refresh)}
             />
           ))}
       </div>

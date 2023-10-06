@@ -1,8 +1,25 @@
 import Label from "./Label";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
-const TodolistCard = ({ handleDataTask, func, data }) => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
   const dateValue = new Date(data.datetime);
+  const [isLoading, setIsLoading] = useState();
+  const handleChecked = async (e) => {
+    setIsLoading(true);
+    await axios
+      .put("task/update", {
+        id: data._id,
+        isChecked: e.target.checked,
+      })
+      .catch((e) => alert(e.message))
+      .finally(() => {
+        setIsLoading(false);
+        refresh();
+      });
+  };
+  useEffect(() => {}, [isLoading]);
   return (
     <section className="min-h-10 flex w-full  items-center justify-between gap-2 border-b-2 border-t-2 p-2 px-8 ">
       <div className="flex flex-col flex-wrap gap-1">
@@ -11,7 +28,9 @@ const TodolistCard = ({ handleDataTask, func, data }) => {
             type="checkbox"
             name="Todolist"
             className="checked:accent-lime-200"
-            defaultChecked={data.isChecked}
+            checked={data.isChecked}
+            onChange={(e) => handleChecked(e)}
+            disabled={isLoading}
           />
           <div>
             <h2 className="font-mono text-sm font-bold">{data.task}</h2>

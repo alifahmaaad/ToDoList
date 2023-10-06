@@ -19,7 +19,10 @@ export const createTask = async (req, res) => {
 export const getAllTaskByUserId = async (req, res) => {
   try {
     const dataUser = await User.findOne({ username: req.username });
-    const tasks = await Todolist.find({ user_id: dataUser.id });
+    const tasks = await Todolist.find({ user_id: dataUser.id }).sort({
+      isChecked: "asc",
+      datetime: -1,
+    });
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ error: error.message });
