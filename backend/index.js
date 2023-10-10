@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import TodolistRouter from "./routers/TodolistRouter.js";
 import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv/config";
 try {
   await mongoose.connect(mongoDB);
   console.log("database connected...");
@@ -17,7 +18,7 @@ const port = 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [process.env.CLIENTHOST],
     credentials: true,
   })
 );
