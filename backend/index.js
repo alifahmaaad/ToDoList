@@ -18,8 +18,9 @@ const port = 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: [process.env.CLIENTHOST],
+    origin: process.env.CLIENTHOST,
     credentials: true,
+    preflightContinue: true,
   })
 );
 app.use(cookieParser());
