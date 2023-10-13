@@ -1,6 +1,10 @@
 import Todolist from "../models/TodolistModel.js";
 import User from "../models/UserModel.js";
 import { kv } from "@vercel/kv";
+// Implementasi redis cache sebenarnya tidak diperlukan untuk kasus ini
+// karna get dari database tidak masalah dan tidak lama dan juga data pada todolist pasti
+// sering berubah-ubah walaupun sering dilakukan get data, namun implementasi redis hanya digunakan untuk belajar implent redis saja.
+// khususnya redis yang disediakan oleh vercel
 export const createTask = async (req, res) => {
   const { task, description, label, datetime } = req.body;
 
