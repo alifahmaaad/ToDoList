@@ -6,6 +6,7 @@ export const createTask = async (req, res) => {
 
   try {
     const dataUser = await User.findOne({ username: req.username });
+    await kv.del(dataUser.id);
     await Todolist.create({
       task,
       description,
