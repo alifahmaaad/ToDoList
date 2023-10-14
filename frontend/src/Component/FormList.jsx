@@ -4,9 +4,11 @@ import { useState } from "react";
 const FormList = ({ func, refresh }) => {
   const [label, setLabel] = useState([]);
   const [labelValue, setLabelValue] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    setLoading(true);
     await axios
       .post("create", {
         task: data.get("task"),
@@ -20,6 +22,7 @@ const FormList = ({ func, refresh }) => {
       .catch((e) => alert(e.message))
       .finally(() => {
         func();
+        setLoading(false);
         refresh();
       });
   };
@@ -111,8 +114,9 @@ const FormList = ({ func, refresh }) => {
           <button
             type="submit"
             className="border bg-lime-200 py-1 font-semibold"
+            disabled={loading}
           >
-            Add Task
+            {loading ? "Loading..." : "Add Task"}
           </button>
         </form>
       </div>

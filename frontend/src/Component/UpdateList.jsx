@@ -6,9 +6,11 @@ const UpdateList = ({ func, dataTask, refresh }) => {
   const [label, setLabel] = useState(dataTask.label);
   const defaultDate = dataTask.datetime;
   const [labelValue, setLabelValue] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    setLoading(true);
     await axios
       .put("task/update", {
         id: dataTask._id,
@@ -23,10 +25,12 @@ const UpdateList = ({ func, dataTask, refresh }) => {
       .catch((e) => alert(e.message))
       .finally(() => {
         func();
+        setLoading(false);
         refresh();
       });
   };
   const handleDelete = async () => {
+    setLoading(true);
     await axios
       .delete(`task/delete/${dataTask._id}`)
       .then(() => {
@@ -35,6 +39,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
       .catch((e) => alert(e.message))
       .finally(() => {
         func();
+        setLoading(false);
         refresh();
       });
   };
@@ -130,14 +135,16 @@ const UpdateList = ({ func, dataTask, refresh }) => {
               type="button"
               className="border px-5 py-1 font-semibold"
               onClick={() => handleDelete()}
+              disabled={loading}
             >
-              Delete Task
+              {loading ? "Loading..." : "Delete Task"}
             </button>
             <button
               type="submit"
               className=" bg-lime-200 px-5 py-1 font-semibold"
+              disabled={loading}
             >
-              Save Change
+              {loading ? "Loading..." : "Save Change"}
             </button>
           </div>
         </form>
