@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import isLoginReducer from "../redux/TokenSlice";
 import { persistReducer, persistStore } from "redux-persist";
-import sessionStorage from "redux-persist/es/storage/session";
+import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
-  storage: sessionStorage,
+  storage: storage,
 };
 const persistedIsLoginReducer = persistReducer(persistConfig, isLoginReducer);
 export const store = configureStore({
