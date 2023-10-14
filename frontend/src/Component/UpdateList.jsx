@@ -6,9 +6,11 @@ const UpdateList = ({ func, dataTask, refresh }) => {
   const [label, setLabel] = useState(dataTask.label);
   const defaultDate = dataTask.datetime;
   const [labelValue, setLabelValue] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    setLoading(true);
     await axios
       .put("task/update", {
         id: dataTask._id,
@@ -23,10 +25,12 @@ const UpdateList = ({ func, dataTask, refresh }) => {
       .catch((e) => alert(e.message))
       .finally(() => {
         func();
+        setLoading(false);
         refresh();
       });
   };
   const handleDelete = async () => {
+    setLoading(true);
     await axios
       .delete(`task/delete/${dataTask._id}`)
       .then(() => {
@@ -35,6 +39,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
       .catch((e) => alert(e.message))
       .finally(() => {
         func();
+        setLoading(false);
         refresh();
       });
   };
@@ -56,6 +61,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           </label>
           <input
             type="text"
+            id="task"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Task"
             name="task"
@@ -66,6 +72,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           </label>
           <textarea
             type="text"
+            id="description"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Description"
             name="description"
@@ -76,6 +83,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           </label>
           <input
             type="datetime-local"
+            id="date"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             name="datetime"
             defaultValue={defaultDate.replace(":00.000Z", "")}
@@ -87,6 +95,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           <div className="flex w-full justify-between">
             <input
               type="text"
+              id="label"
               className="w-full rounded-sm border-b border-t p-2"
               name="label"
               onChange={(e) => setLabelValue(e.target.value)}
@@ -126,14 +135,16 @@ const UpdateList = ({ func, dataTask, refresh }) => {
               type="button"
               className="border px-5 py-1 font-semibold"
               onClick={() => handleDelete()}
+              disabled={loading}
             >
-              Delete Task
+              {loading ? "Loading..." : "Delete Task"}
             </button>
             <button
               type="submit"
               className=" bg-lime-200 px-5 py-1 font-semibold"
+              disabled={loading}
             >
-              Save Change
+              {loading ? "Loading..." : "Save Change"}
             </button>
           </div>
         </form>

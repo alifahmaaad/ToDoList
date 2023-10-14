@@ -5,7 +5,8 @@ import mongoose from "mongoose";
 import TodolistRouter from "./routers/TodolistRouter.js";
 import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 try {
   await mongoose.connect(mongoDB);
   console.log("database connected...");

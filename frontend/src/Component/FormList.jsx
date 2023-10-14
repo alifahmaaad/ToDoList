@@ -4,9 +4,11 @@ import { useState } from "react";
 const FormList = ({ func, refresh }) => {
   const [label, setLabel] = useState([]);
   const [labelValue, setLabelValue] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    setLoading(true);
     await axios
       .post("create", {
         task: data.get("task"),
@@ -20,6 +22,7 @@ const FormList = ({ func, refresh }) => {
       .catch((e) => alert(e.message))
       .finally(() => {
         func();
+        setLoading(false);
         refresh();
       });
   };
@@ -41,6 +44,7 @@ const FormList = ({ func, refresh }) => {
           </label>
           <input
             type="text"
+            id="task"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Task"
             name="task"
@@ -51,6 +55,7 @@ const FormList = ({ func, refresh }) => {
           </label>
           <textarea
             type="text"
+            id="description"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Description"
             name="description"
@@ -60,6 +65,7 @@ const FormList = ({ func, refresh }) => {
           </label>
           <input
             type="datetime-local"
+            id="date"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             name="datetime"
             required
@@ -72,6 +78,7 @@ const FormList = ({ func, refresh }) => {
               type="text"
               className="w-full rounded-sm border-b border-t p-2"
               name="label"
+              id="label"
               onChange={(e) => setLabelValue(e.target.value)}
               value={labelValue}
             />
@@ -107,8 +114,9 @@ const FormList = ({ func, refresh }) => {
           <button
             type="submit"
             className="border bg-lime-200 py-1 font-semibold"
+            disabled={loading}
           >
-            Add Task
+            {loading ? "Loading..." : "Add Task"}
           </button>
         </form>
       </div>

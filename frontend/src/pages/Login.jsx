@@ -56,6 +56,7 @@ const Login = () => {
           <input
             placeholder="Username"
             name="username"
+            id="username"
             className="w-full rounded-sm bg-white p-2"
             type="text"
           />
@@ -63,6 +64,7 @@ const Login = () => {
           <input
             placeholder="Password"
             name="password"
+            id="password"
             className="w-full rounded-sm bg-white p-2"
             type="password"
           />

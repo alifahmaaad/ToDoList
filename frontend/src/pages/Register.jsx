@@ -44,6 +44,7 @@ const Register = () => {
           <input
             placeholder="Username"
             name="username"
+            id="username"
             className="w-full rounded-sm bg-white p-2"
             type="text"
             pattern="^[a-zA-Z]\S+$"
@@ -54,6 +55,7 @@ const Register = () => {
           <input
             placeholder="Password"
             name="password"
+            id="password"
             className="w-full rounded-sm bg-white p-2"
             type="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
