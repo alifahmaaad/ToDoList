@@ -33,21 +33,48 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
             disabled={isLoading}
           />
           <div>
-            <h2 className="font-mono text-sm font-bold">{data.task}</h2>
-            <div className="line-clamp-2 font-mono text-sm">
+            <h2
+              className={
+                (data.isChecked ? "line-through " : "") +
+                "font-mono text-sm font-bold"
+              }
+            >
+              {data.task}
+            </h2>
+            <div
+              className={
+                (data.isChecked ? "line-through " : "") +
+                "line-clamp-2 font-mono text-sm"
+              }
+            >
               {data.description}
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-3 pl-5">
+        <div
+          className={
+            (data.isChecked ? "line-through " : "") +
+            "flex flex-wrap items-center gap-3 pl-5"
+          }
+        >
           {data.label?.map((val, i) => (
             <Label key={i} val={val} />
           ))}
-          <div className="flex items-center gap-1 text-sm">
+          <div
+            className={
+              (data.isChecked ? "line-through " : "") +
+              "flex items-center gap-1 text-sm"
+            }
+          >
             <FontAwesomeIcon icon={faClock} />
             {dateValue.toLocaleTimeString()}
           </div>
-          <div className="flex items-center gap-1 text-sm">
+          <div
+            className={
+              (data.isChecked ? "line-through " : "") +
+              "flex items-center gap-1 text-sm"
+            }
+          >
             <FontAwesomeIcon icon={faCalendar} />
             {dateValue.toDateString()}
           </div>
