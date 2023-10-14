@@ -41,6 +41,7 @@ const FormList = ({ func, refresh }) => {
           </label>
           <input
             type="text"
+            id="task"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Task"
             name="task"
@@ -51,6 +52,7 @@ const FormList = ({ func, refresh }) => {
           </label>
           <textarea
             type="text"
+            id="description"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Description"
             name="description"
@@ -60,6 +62,7 @@ const FormList = ({ func, refresh }) => {
           </label>
           <input
             type="datetime-local"
+            id="date"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             name="datetime"
             required
@@ -72,6 +75,7 @@ const FormList = ({ func, refresh }) => {
               type="text"
               className="w-full rounded-sm border-b border-t p-2"
               name="label"
+              id="label"
               onChange={(e) => setLabelValue(e.target.value)}
               value={labelValue}
             />

@@ -56,6 +56,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           </label>
           <input
             type="text"
+            id="task"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Task"
             name="task"
@@ -66,6 +67,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           </label>
           <textarea
             type="text"
+            id="description"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             placeholder="Description"
             name="description"
@@ -76,6 +78,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           </label>
           <input
             type="datetime-local"
+            id="date"
             className="flex items-center gap-2 rounded-sm border-b border-t p-2"
             name="datetime"
             defaultValue={defaultDate.replace(":00.000Z", "")}
@@ -87,6 +90,7 @@ const UpdateList = ({ func, dataTask, refresh }) => {
           <div className="flex w-full justify-between">
             <input
               type="text"
+              id="label"
               className="w-full rounded-sm border-b border-t p-2"
               name="label"
               onChange={(e) => setLabelValue(e.target.value)}
