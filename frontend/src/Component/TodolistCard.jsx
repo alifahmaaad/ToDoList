@@ -28,7 +28,7 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
             type="checkbox"
             name="Todolist"
             className="checked:accent-lime-200"
-            checked={data.isChecked}
+            defaultChecked={data.isChecked}
             onChange={(e) => handleChecked(e)}
             disabled={isLoading}
           />
@@ -67,7 +67,7 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
             }
           >
             <FontAwesomeIcon icon={faClock} />
-            {dateValue.toLocaleTimeString()}
+            {dateValue.toISOString().split("T")[1].replace(".000Z", "")}
           </div>
           <div
             className={

@@ -12,9 +12,7 @@ const Sidebar = ({ func, sidebarVal }) => {
     <aside className=" h-fit w-full rounded-md p-4 lg:h-full lg:w-fit">
       <div className="flex h-full flex-col gap-4 rounded-lg bg-gray-50 p-5 font-mono shadow-md lg:w-[18vw]">
         <p className="pb-5 text-2xl font-bold">Menu</p>
-        <label htmlFor="task" className="text-sm font-semibold">
-          Lists
-        </label>
+        <h5 className="text-sm font-semibold">Lists</h5>
         <div className="flex h-max flex-col justify-center gap-2">
           <button
             className={
