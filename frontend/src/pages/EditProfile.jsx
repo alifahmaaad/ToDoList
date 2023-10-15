@@ -31,15 +31,32 @@ const EditProfile = () => {
         old_password: data.get("old_password"),
         new_password: data.get("new_password"),
       })
-      .then((res) => {
+      .then(async (res) => {
         if (res.status == 200) {
           setSuccessMSG(`username ${res.data} has been updated`);
-          dispatch(deleteIsLogin());
-          delete axios.defaults.headers.common["Authorization"];
-          setTimeout(() => {
-            setLoading(false);
-            navigate("/login");
-          }, 1500);
+          await axios
+            .get("logout", { withCredentials: true })
+            .then((res) => {
+              if (res.status == 200) {
+                dispatch(deleteIsLogin());
+                delete axios.defaults.headers.common["Authorization"];
+                setTimeout(() => {
+                  navigate("/login");
+                  setLoading(false);
+                }, 1500);
+              }
+            })
+            .catch((e) => {
+              if (e.response?.status == 403) {
+                dispatch(deleteIsLogin());
+                delete axios.defaults.headers.common["Authorization"];
+                setTimeout(() => {
+                  navigate("/login");
+                  setLoading(false);
+                }, 1500);
+              }
+              alert(e.message);
+            });
         }
       })
       .catch((e) => {
