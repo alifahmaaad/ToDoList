@@ -57,3 +57,11 @@ export const logout = async (req, res) => {
   res.cookie("refreshToken", "", { maxAge: 0 });
   res.sendStatus(200);
 };
+export const getUser = async (req, res) => {
+  try {
+    const dataUser = await User.findOne({ username: req.username });
+    dataUser && res.status(200).json(dataUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
