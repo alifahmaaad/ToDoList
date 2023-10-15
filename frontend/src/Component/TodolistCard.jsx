@@ -83,7 +83,7 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
       <div>
         <button
           className={
-            "h-1.5 w-1.5 rotate-45 border-r-2 border-t-2 border-gray-500 duration-300"
+            "h-2 w-2 rotate-45 border-r-2 border-t-2 border-gray-500 duration-300"
           }
           onClick={() => {
             func();
