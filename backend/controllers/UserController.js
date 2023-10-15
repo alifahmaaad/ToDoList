@@ -65,3 +65,28 @@ export const getUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+export const updateUser = async (req, res) => {
+  const { username, old_password, new_password } = req.body;
+  try {
+    const userData = await User.findOne({
+      username: username,
+    });
+    if (userData == null) {
+      res.status(400).json({ message: "User with that username not found!" });
+    } else {
+      const isVerify = await bcrypt.compare(old_password, userData.password);
+      if (!isVerify) {
+        res.status(400).json({ message: "Wrong Old Password" });
+      } else {
+        const salt = await bcrypt.genSalt();
+        const hashpassword = await bcrypt.hash(new_password, salt);
+        await User.findByIdAndUpdate(
+          { _id: userData.id },
+          { password: hashpassword }
+        );
+      }
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
