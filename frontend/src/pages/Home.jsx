@@ -52,6 +52,17 @@ const Home = () => {
     await axios
       .get("task")
       .then((res) => setDataTasks(res.data))
+      .catch((e) => {
+        if (e.response?.status == 403) {
+          dispatch(deleteIsLogin());
+          delete axios.defaults.headers.common["Authorization"];
+          setTimeout(() => {
+            navigate("/login");
+            setIsLoading(false);
+          }, 1500);
+        }
+        alert(e.message);
+      })
       .finally(() => setIsLoading(false));
   };
   return (

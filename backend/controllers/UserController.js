@@ -57,3 +57,37 @@ export const logout = async (req, res) => {
   res.cookie("refreshToken", "", { maxAge: 0 });
   res.sendStatus(200);
 };
+export const getUser = async (req, res) => {
+  try {
+    const dataUser = await User.findOne({ username: req.username });
+    dataUser && res.status(200).json(dataUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+export const updateUser = async (req, res) => {
+  const { username, old_password, new_password } = req.body;
+  try {
+    const userData = await User.findOne({
+      username: req.username,
+    });
+    if (userData == null) {
+      res.status(400).json({ message: "User with that username not found!" });
+    } else {
+      const isVerify = await bcrypt.compare(old_password, userData.password);
+      if (!isVerify) {
+        res.status(400).json({ message: "Wrong Old Password" });
+      } else {
+        const salt = await bcrypt.genSalt();
+        const hashpassword = await bcrypt.hash(new_password, salt);
+        await User.findByIdAndUpdate(
+          { _id: userData.id },
+          { username: username, password: hashpassword }
+        );
+        res.status(200).json(username);
+      }
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

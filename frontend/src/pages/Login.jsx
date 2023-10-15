@@ -38,7 +38,6 @@ const Login = () => {
         if (e.code == "ERR_NETWORK") {
           alert(e.message);
         } else {
-          console.log("test");
           alert(e.response?.data?.message);
         }
         setIsLoading(false);

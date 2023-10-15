@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./interceptors/axios.js";
+import EditProfile from "./pages/EditProfile";
 function App() {
   return (
     <div className="flex h-full w-full items-center md:justify-between">
@@ -12,7 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<>Logout Page</>} />
+        <Route path="/profile/edit" element={<EditProfile />} />
       </Routes>
     </div>
   );
