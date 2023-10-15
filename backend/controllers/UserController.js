@@ -69,7 +69,7 @@ export const updateUser = async (req, res) => {
   const { username, old_password, new_password } = req.body;
   try {
     const userData = await User.findOne({
-      username: username,
+      username: req.username,
     });
     if (userData == null) {
       res.status(400).json({ message: "User with that username not found!" });
@@ -82,8 +82,9 @@ export const updateUser = async (req, res) => {
         const hashpassword = await bcrypt.hash(new_password, salt);
         await User.findByIdAndUpdate(
           { _id: userData.id },
-          { password: hashpassword }
+          { username: username, password: hashpassword }
         );
+        res.status(200).json(username);
       }
     }
   } catch (error) {
