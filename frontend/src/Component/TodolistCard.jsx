@@ -28,7 +28,7 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
             type="checkbox"
             name="Todolist"
             className="checked:accent-lime-200"
-            defaultChecked={data.isChecked}
+            checked={data.isChecked}
             onChange={(e) => handleChecked(e)}
             disabled={isLoading}
           />
