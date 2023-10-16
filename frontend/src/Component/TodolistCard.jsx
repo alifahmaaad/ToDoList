@@ -60,15 +60,7 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
           {data.label?.map((val, i) => (
             <Label key={i} val={val} />
           ))}
-          <div
-            className={
-              (data.isChecked ? "line-through " : "") +
-              "flex items-center gap-1 text-sm"
-            }
-          >
-            <FontAwesomeIcon icon={faClock} />
-            {dateValue.toISOString().split("T")[1].replace(".000Z", "")}
-          </div>
+
           <div
             className={
               (data.isChecked ? "line-through " : "") +
@@ -77,6 +69,15 @@ const TodolistCard = ({ handleDataTask, func, data, refresh }) => {
           >
             <FontAwesomeIcon icon={faCalendar} />
             {dateValue.toDateString()}
+          </div>
+          <div
+            className={
+              (data.isChecked ? "line-through " : "") +
+              "flex items-center gap-1 text-sm"
+            }
+          >
+            <FontAwesomeIcon icon={faClock} />
+            {dateValue.toISOString().split("T")[1].replace(".000Z", "")}
           </div>
         </div>
       </div>
