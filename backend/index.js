@@ -10,10 +10,11 @@ import swaggerUi from "swagger-ui-express";
 // import swaggerFile from "./ImportJson.js";
 import { promises as fs } from "fs";
 
-const swaggerFile = await fs.readFile(
+const data = await fs.readFile(
   process.cwd() + "/public/data/swagger-output.json",
   "utf8"
 );
+const swaggerFile = JSON.parse(data);
 
 dotenv.config();
 try {
