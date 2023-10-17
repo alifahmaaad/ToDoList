@@ -6,6 +6,9 @@ import TodolistRouter from "./routers/TodolistRouter.js";
 import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "./swagger-output.json" assert { type: "json" };
+
 dotenv.config();
 try {
   await mongoose.connect(mongoDB);
@@ -25,6 +28,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(TodolistRouter);
 app.use(UserRouter);
 app.listen(port, () => {

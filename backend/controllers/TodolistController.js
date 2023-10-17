@@ -6,6 +6,7 @@ import { kv } from "@vercel/kv";
 // sering berubah-ubah walaupun sering dilakukan get data, namun implementasi redis hanya digunakan untuk belajar implent redis saja.
 // khususnya redis yang disediakan oleh vercel
 export const createTask = async (req, res) => {
+  // #swagger.tags = ['Todolist']
   const { task, description, label, datetime } = req.body;
 
   try {
@@ -23,6 +24,7 @@ export const createTask = async (req, res) => {
   }
 };
 export const getAllTaskByUserId = async (req, res) => {
+  // #swagger.tags = ['Todolist']
   try {
     const dataUser = await User.findOne({ username: req.username });
     const dataFromRedis = await kv.get(dataUser.id);
@@ -41,6 +43,7 @@ export const getAllTaskByUserId = async (req, res) => {
   }
 };
 export const updateTask = async (req, res) => {
+  // #swagger.tags = ['Todolist']
   try {
     const task = await Todolist.findByIdAndUpdate(
       { _id: req.body.id },
@@ -53,6 +56,7 @@ export const updateTask = async (req, res) => {
   }
 };
 export const deleteTask = async (req, res) => {
+  // #swagger.tags = ['Todolist']
   const id = req.params.id;
   try {
     const task = await Todolist.findByIdAndDelete({ _id: id });

@@ -4,6 +4,7 @@ import cookie from "cookie-parser";
 import jwt from "jsonwebtoken";
 import Token from "../models/TokenModel.js";
 export const createUser = async (req, res) => {
+  // #swagger.tags = ['Users']
   const { username, password } = req.body;
   const salt = await bcrypt.genSalt();
   const hashpassword = await bcrypt.hash(password, salt);
@@ -16,6 +17,7 @@ export const createUser = async (req, res) => {
   }
 };
 export const login = async (req, res) => {
+  // #swagger.tags = ['Users']
   const { username, password } = req.body;
   try {
     const userData = await User.findOne({
@@ -51,6 +53,7 @@ export const login = async (req, res) => {
   }
 };
 export const logout = async (req, res) => {
+  // #swagger.tags = ['Users']
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) return res.sendStatus(204);
   await Token.findOneAndDelete({ refreshToken: refreshToken });
@@ -58,6 +61,7 @@ export const logout = async (req, res) => {
   res.sendStatus(200);
 };
 export const getUser = async (req, res) => {
+  // #swagger.tags = ['Users']
   try {
     const dataUser = await User.findOne({ username: req.username });
     dataUser && res.status(200).json(dataUser);
@@ -66,6 +70,7 @@ export const getUser = async (req, res) => {
   }
 };
 export const updateUser = async (req, res) => {
+  // #swagger.tags = ['Users']
   const { username, old_password, new_password } = req.body;
   try {
     const userData = await User.findOne({

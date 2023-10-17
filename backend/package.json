@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "start": "node Swagger.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
