@@ -15,7 +15,7 @@ const Home = () => {
     "Checked List",
     "Unchecked List",
   ];
-  const [sidebarVal, setSidebarVal] = useState(0);
+  const [sidebarVal, setSidebarVal] = useState(1);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [dataTask, setDataTask] = useState();
