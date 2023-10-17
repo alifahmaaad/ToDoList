@@ -13,6 +13,7 @@ const Home = () => {
     "Upcoming List",
     "List by date",
     "Checked List",
+    "Unchecked List",
   ];
   const [sidebarVal, setSidebarVal] = useState(0);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -92,8 +93,10 @@ const Home = () => {
                 return new Date(data.datetime) > new Date();
               } else if (position[sidebarVal] == "List by date") {
                 return date.getDate() == new Date(data.datetime).getDate();
-              } else {
+              } else if (position[sidebarVal] == "Checked List") {
                 return data.isChecked;
+              } else {
+                return !data.isChecked;
               }
             })
             .map((val, i) => (

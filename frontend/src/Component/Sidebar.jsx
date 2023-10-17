@@ -1,8 +1,9 @@
 import {
   faAnglesRight,
   faCalendarDays,
-  faCircleCheck,
   faList12,
+  faSquare,
+  faSquareCheck,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,8 +63,18 @@ const Sidebar = ({ func, sidebarVal }) => {
             }
             onClick={() => func(3)}
           >
-            <FontAwesomeIcon icon={faCircleCheck} />
+            <FontAwesomeIcon icon={faSquareCheck} />
             Checked List
+          </button>
+          <button
+            className={
+              (sidebarVal == 4 ? "bg-gray-300 " : "") +
+              "flex items-center gap-2 rounded-sm border-b border-t p-2"
+            }
+            onClick={() => func(4)}
+          >
+            <FontAwesomeIcon icon={faSquare} />
+            Unchecked List
           </button>
           <LogoutButton />
         </div>
