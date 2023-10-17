@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import Token from "../models/TokenModel.js";
 export const refreshToken = async (req, res) => {
+  // #swagger.tags = ['Token']
   try {
     const refreshToken = req.cookies.refreshToken;
     const payload = jwt.verify(refreshToken, "Secret_Refresh_key");
