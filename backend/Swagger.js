@@ -9,6 +9,7 @@ const doc = {
   },
   host: "https://todolist-server.alifahmaaad.vercel.app/",
   basePath: "/",
+  servers: "https://todolist-server.alifahmaaad.vercel.app/",
   schemes: ["http", "https"],
   consumes: ["application/json"],
   produces: ["application/json"],
