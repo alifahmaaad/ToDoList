@@ -7,8 +7,11 @@ import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "./ImportJson.js";
-
+const { default: swaggerFile } = await import("./swagger-output.json", {
+  assert: {
+    type: "json",
+  },
+});
 dotenv.config();
 try {
   await mongoose.connect(mongoDB);
