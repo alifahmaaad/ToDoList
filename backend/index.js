@@ -7,15 +7,13 @@ import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-const { default: swaggerFile } = await import("./swagger-output.json", {
-  assert: {
-    type: "json",
-  },
-});
+import swaggerFile from "./ImportJson.js";
+
 dotenv.config();
 try {
   await mongoose.connect(mongoDB);
   console.log("database connected...");
+  console.log(swaggerFile.swaggerFile);
 } catch (error) {
   console.log(error);
 }
@@ -31,7 +29,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile.swaggerFile));
 app.use(TodolistRouter);
 app.use(UserRouter);
 app.listen(port, () => {
