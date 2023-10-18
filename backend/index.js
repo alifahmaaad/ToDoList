@@ -7,7 +7,7 @@ import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "./ImportJson.js";
+import swaggerFile from "./ImportJson.cjs";
 
 dotenv.config();
 try {
