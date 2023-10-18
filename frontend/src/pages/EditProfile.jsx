@@ -87,7 +87,7 @@ const EditProfile = () => {
   }
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="flex h-fit max-h-[30rem] w-full max-w-[25rem] flex-col items-center justify-center rounded-md bg-gray-50 py-10 font-mono shadow-lg">
+      <div className="flex h-fit max-h-[40rem] w-full max-w-[25rem] flex-col items-center justify-center rounded-md bg-gray-50 py-10 font-mono shadow-lg">
         <h1 className="text-xl font-bold">Edit Profile</h1>
         <form
           className="flex w-full flex-col gap-3 px-4"
