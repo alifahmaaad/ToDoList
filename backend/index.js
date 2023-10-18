@@ -7,20 +7,20 @@ import UserRouter from "./routers/UserRouter.js";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-// import swaggerFile from "./ImportJson.js";
-import { promises as fs } from "fs";
+import swaggerFile from "./ImportJson.cjs";
 
-const data = await fs.readFile(
-  process.cwd() +"/backend/public/data/swagger-output.json",
-  "utf8"
-);
-const swaggerFile = JSON.parse(data);
-
+const options = {
+  customCssUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui.min.css",
+  customJs: [
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui-bundle.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui-standalone-preset.js",
+  ],
+};
 dotenv.config();
 try {
   await mongoose.connect(mongoDB);
   console.log("database connected...");
-  console.log(swaggerFile);
 } catch (error) {
   console.log(error);
 }
@@ -36,7 +36,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 app.use(TodolistRouter);
 app.use(UserRouter);
 app.listen(port, () => {
