@@ -9,8 +9,14 @@ import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "./ImportJson.cjs";
 
-const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+const options = {
+  customCssUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui.min.css",
+  customJs: [
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui-bundle.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui-standalone-preset.js",
+  ],
+};
 dotenv.config();
 try {
   await mongoose.connect(mongoDB);
@@ -30,11 +36,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(
-  "/doc",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerFile, { customCssUrl: CSS_URL })
-);
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 app.use(TodolistRouter);
 app.use(UserRouter);
 app.listen(port, () => {
