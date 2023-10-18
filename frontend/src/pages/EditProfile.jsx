@@ -30,6 +30,7 @@ const EditProfile = () => {
         username: data.get("username"),
         old_password: data.get("old_password"),
         new_password: data.get("new_password"),
+        email: data.get("email"),
       })
       .then(async (res) => {
         if (res.status == 200) {
@@ -103,6 +104,14 @@ const EditProfile = () => {
             defaultValue={dataUser.username}
             title="Must start with character, no space and case sensitive"
             required
+          />
+          <label htmlFor="email">E-mail</label>
+          <input
+            placeholder="email"
+            name="email"
+            id="email"
+            className="w-full rounded-sm bg-white p-2"
+            type="email"
           />
           <label htmlFor="old_password">Enter Old Password</label>
           <input

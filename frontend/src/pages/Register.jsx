@@ -13,6 +13,7 @@ const Register = () => {
       .post(`register`, {
         username: data.get("username"),
         password: data.get("password"),
+        email: data.get("email"),
       })
       .then((res) => {
         if (res.status == 200) {
@@ -61,6 +62,14 @@ const Register = () => {
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
             required
+          />
+          <label htmlFor="email">E-mail</label>
+          <input
+            placeholder="email"
+            name="email"
+            id="email"
+            className="w-full rounded-sm bg-white p-2"
+            type="email"
           />
           <button
             className="bg-gray-200 p-2 font-mono font-semibold"

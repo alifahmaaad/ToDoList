@@ -5,13 +5,15 @@ import jwt from "jsonwebtoken";
 import Token from "../models/TokenModel.js";
 export const createUser = async (req, res) => {
   // #swagger.tags = ['Users']
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
   const salt = await bcrypt.genSalt();
   const hashpassword = await bcrypt.hash(password, salt);
   try {
-    await User.create({ username, password: hashpassword }).then((data) => {
-      res.status(200).json(data.username);
-    });
+    await User.create({ username, password: hashpassword, email }).then(
+      (data) => {
+        res.status(200).json(data.username);
+      }
+    );
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -71,7 +73,7 @@ export const getUser = async (req, res) => {
 };
 export const updateUser = async (req, res) => {
   // #swagger.tags = ['Users']
-  const { username, old_password, new_password } = req.body;
+  const { username, old_password, new_password, email } = req.body;
   try {
     const userData = await User.findOne({
       username: req.username,
@@ -87,7 +89,7 @@ export const updateUser = async (req, res) => {
         const hashpassword = await bcrypt.hash(new_password, salt);
         await User.findByIdAndUpdate(
           { _id: userData.id },
-          { username: username, password: hashpassword }
+          { username: username, password: hashpassword, email: email }
         );
         res.status(200).json(username);
       }
