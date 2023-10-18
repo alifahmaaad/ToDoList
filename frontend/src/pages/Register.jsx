@@ -70,6 +70,7 @@ const Register = () => {
             id="email"
             className="w-full rounded-sm bg-white p-2"
             type="email"
+            required
           />
           <button
             className="bg-gray-200 p-2 font-mono font-semibold"

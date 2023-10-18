@@ -111,7 +111,9 @@ const EditProfile = () => {
             name="email"
             id="email"
             className="w-full rounded-sm bg-white p-2"
+            defaultValue={dataUser.email}
             type="email"
+            required
           />
           <label htmlFor="old_password">Enter Old Password</label>
           <input
