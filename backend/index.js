@@ -11,7 +11,7 @@ import swaggerUi from "swagger-ui-express";
 import { promises as fs } from "fs";
 
 const data = await fs.readFile(
-  "./backend/public/data/swagger-output.json",
+  process.cwd() +"/backend/public/data/swagger-output.json",
   "utf8"
 );
 const swaggerFile = JSON.parse(data);
