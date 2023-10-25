@@ -4,6 +4,7 @@ import {
   getUser,
   login,
   logout,
+  resetPassword,
   updateUser,
 } from "../controllers/UserController.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
@@ -14,5 +15,6 @@ router.post("/register", createUser);
 router.get("/logout", verifyToken, logout);
 router.get("/refresh", refreshToken);
 router.get("/user", verifyToken, getUser);
+router.post("/resetpassword", resetPassword);
 router.put("/update/user", verifyToken, updateUser);
 export default router;

@@ -85,6 +85,14 @@ const Login = () => {
             Register
           </button>
         </p>
+        <p>
+          <button
+            onClick={() => navigate("/forgotpassword")}
+            className="text-xs text-lime-500"
+          >
+            Forgot Password
+          </button>
+        </p>
         {successMSG != "" && (
           <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black bg-opacity-30">
             <div className="absolute rounded-md bg-white p-10 text-center font-bold text-green-700 shadow-md">
