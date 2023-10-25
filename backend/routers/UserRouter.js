@@ -15,6 +15,6 @@ router.post("/register", createUser);
 router.get("/logout", verifyToken, logout);
 router.get("/refresh", refreshToken);
 router.get("/user", verifyToken, getUser);
-router.put("/update/user", verifyToken, updateUser);
 router.post("/resetpassword", resetPassword);
+router.put("/update/user", verifyToken, updateUser);
 export default router;
