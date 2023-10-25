@@ -9,9 +9,7 @@
   "paths": {
     "/create": {
       "post": {
-        "tags": [
-          "Todolist"
-        ],
+        "tags": ["Todolist"],
         "description": "",
         "parameters": [
           {
@@ -60,9 +58,7 @@
     },
     "/task/delete/{id}": {
       "delete": {
-        "tags": [
-          "Todolist"
-        ],
+        "tags": ["Todolist"],
         "description": "",
         "parameters": [
           {
@@ -96,9 +92,7 @@
     },
     "/task/update": {
       "put": {
-        "tags": [
-          "Todolist"
-        ],
+        "tags": ["Todolist"],
         "description": "",
         "parameters": [
           {
@@ -138,9 +132,7 @@
     },
     "/task": {
       "get": {
-        "tags": [
-          "Todolist"
-        ],
+        "tags": ["Todolist"],
         "description": "",
         "parameters": [
           {
@@ -166,9 +158,7 @@
     },
     "/login": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "",
         "responses": {
           "200": {
@@ -202,9 +192,7 @@
     },
     "/register": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "",
         "responses": {
           "200": {
@@ -225,6 +213,9 @@
                   },
                   "password": {
                     "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
                   }
                 }
               }
@@ -235,9 +226,7 @@
     },
     "/logout": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "",
         "parameters": [
           {
@@ -263,9 +252,7 @@
     },
     "/refresh": {
       "get": {
-        "tags": [
-          "Token"
-        ],
+        "tags": ["Token"],
         "description": "",
         "responses": {
           "200": {
@@ -282,9 +269,7 @@
     },
     "/user": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "",
         "parameters": [
           {
@@ -308,11 +293,43 @@
         }
       }
     },
+    "/resetpassword": {
+      "post": {
+        "tags": ["Users"],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/update/user": {
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "description": "",
         "parameters": [
           {
@@ -350,6 +367,9 @@
                     "example": "any"
                   },
                   "new_password": {
+                    "example": "any"
+                  },
+                  "email": {
                     "example": "any"
                   }
                 }
