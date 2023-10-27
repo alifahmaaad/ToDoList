@@ -21,6 +21,10 @@ export const refreshToken = async (req, res) => {
     });
     res.status(200).json({ token: accessToken });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    if (error.message == "jwt expired") {
+      res.sendStatus(403);
+    } else {
+      res.status(500).json({ error: error.message });
+    }
   }
 };
